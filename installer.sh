@@ -22,16 +22,16 @@ mkdir -p /www/uci-static/eqosplus         # Pastikan direktori eqosplus tersedia
 # 3. Download file baru dari GitHub ke path masing-masing
 echo "Langkah 3: Mengunduh dan menempatkan file..."
 echo "→ Mengunduh eqosplus.lua..."
-curl -fsSL "$REPO_URL/usr/lib/lua/luci/model/cbi/eqosplus.lua" -o "/usr/lib/lua/luci/model/cbi/eqosplus.lua" && echo "✓ eqosplus.lua berhasil dipasang" || { echo "Gagal download eqosplus.lua"; exit 1; }
+curl -fsSL "$REPO_URL/files/usr/lib/lua/luci/model/cbi/eqosplus.lua" -o "/usr/lib/lua/luci/model/cbi/eqosplus.lua" && echo "✓ eqosplus.lua berhasil dipasang" || { echo "Gagal download eqosplus.lua"; exit 1; }
 
 echo "→ Mengunduh custom.css..."
-curl -fsSL "$REPO_URL/www/uci-static/eqosplus/custom.css" -o "/www/uci-static/eqosplus/custom.css" && echo "✓ custom.css berhasil dipasang" || { echo "Gagal download custom.css"; exit 1; }
+curl -fsSL "$REPO_URL/files/www/uci-static/eqosplus/custom.css" -o "/www/uci-static/eqosplus/custom.css" && echo "✓ custom.css berhasil dipasang" || { echo "Gagal download custom.css"; exit 1; }
 
 echo "→ Mengunduh custom.js..."
-curl -fsSL "$REPO_URL/www/uci-static/eqosplus/custom.js" -o "/www/uci-static/eqosplus/custom.js" && echo "✓ custom.js berhasil dipasang" || { echo "Gagal download custom.js"; exit 1; }
+curl -fsSL "$REPO_URL/files/www/uci-static/eqosplus/custom.js" -o "/www/uci-static/eqosplus/custom.js" && echo "✓ custom.js berhasil dipasang" || { echo "Gagal download custom.js"; exit 1; }
 
 echo "→ Mengunduh konversi.html..."
-curl -fsSL "$REPO_URL/www/konversi.html" -o "/www/konversi.html" && echo "✓ konversi.html berhasil dipasang" || { echo "Gagal download konversi.html"; exit 1; }
+curl -fsSL "$REPO_URL/files/www/konversi.html" -o "/www/konversi.html" && echo "✓ konversi.html berhasil dipasang" || { echo "Gagal download konversi.html"; exit 1; }
 
 # 4. Set permission baca agar file dapat diakses LuCI/web (umum di OpenWrt 644)
 echo "Langkah 4: Mengatur permissions file..."
