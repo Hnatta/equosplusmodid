@@ -30,10 +30,10 @@ echo "→ Mengunduh index.htm..."
 curl -fsSL "$REPO_URL/files/usr/lib/lua/luci/view/eqosplus/index.htm" -o "/usr/lib/lua/luci/view/eqosplus/index.htm" && echo "✓ index.htm berhasil dipasang" || { echo "Gagal download index.htm"; exit 1; }
 
 echo "→ Mengunduh custom.css..."
-curl -fsSL "$REPO_URL/files/www/luci-static/eqosplus/custom.css" -o "/www/luci-static/eqosplus/custom.css" && echo "✓ custom.css berhasil dipasang" || { echo "Gagal download custom.css"; exit 1; }
+curl -fsSL "$REPO_URL/files/www/%20luci-static/eqosplus/custom.css" -o "/www/luci-static/eqosplus/custom.css" && echo "✓ custom.css berhasil dipasang" || { echo "Gagal download custom.css"; exit 1; }
 
 echo "→ Mengunduh custom.js..."
-curl -fsSL "$REPO_URL/files/www/luci-static/eqosplus/custom.js" -o "/www/luci-static/eqosplus/custom.js" && echo "✓ custom.js berhasil dipasang" || { echo "Gagal download custom.js"; exit 1; }
+curl -fsSL "$REPO_URL/files/www/%20luci-static/eqosplus/custom.js" -o "/www/luci-static/eqosplus/custom.js" && echo "✓ custom.js berhasil dipasang" || { echo "Gagal download custom.js"; exit 1; }
 
 echo "→ Mengunduh konversi.html..."
 curl -fsSL "$REPO_URL/files/www/konversi.html" -o "/www/konversi.html" && echo "✓ konversi.html berhasil dipasang" || { echo "Gagal download konversi.html"; exit 1; }
