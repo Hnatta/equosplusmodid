@@ -1,91 +1,68 @@
 #!/bin/sh
 
 # EQOSPlus Mod Indonesia Installer
-# Repository: https://github.com/Hnatta/equosplusmodid
+# Sumber repository: https://github.com/Hnatta/equosplusmodid
 
-echo "Starting EQOSPlus Mod Indonesia installation..."
+echo "=== Memulai instalasi EQOSPlus Mod Indonesia ==="
 
-# Repository configuration
 REPO_URL="https://raw.githubusercontent.com/Hnatta/equosplusmodid/main"
 
-# Step 1: Remove existing files
-echo "Step 1: Removing existing files..."
-[ -f "/usr/lib/lua/luci/model/cbi/eqosplus.lua" ] && rm -f "/usr/lib/lua/luci/model/cbi/eqosplus.lua" && echo "Removed eqosplus.lua"
-[ -f "/www/uci-static/eqosplus/custom.css" ] && rm -f "/www/uci-static/eqosplus/custom.css" && echo "Removed custom.css"
-[ -f "/www/uci-static/eqosplus/custom.js" ] && rm -f "/www/uci-static/eqosplus/custom.js" && echo "Removed custom.js"
-[ -f "/www/konversi.html" ] && rm -f "/www/konversi.html" && echo "Removed konversi.html"
+# 1. Hapus file lama jika ada
+echo "Langkah 1: Menghapus file lama..."
+[ -f "/usr/lib/lua/luci/model/cbi/eqosplus.lua" ] && rm -f "/usr/lib/lua/luci/model/cbi/eqosplus.lua" && echo "✓ eqosplus.lua dihapus"   # Hapus file eqosplus.lua lama
+[ -f "/www/uci-static/eqosplus/custom.css" ] && rm -f "/www/uci-static/eqosplus/custom.css" && echo "✓ custom.css dihapus"             # Hapus file custom.css lama
+[ -f "/www/uci-static/eqosplus/custom.js" ] && rm -f "/www/uci-static/eqosplus/custom.js" && echo "✓ custom.js dihapus"               # Hapus file custom.js lama
+[ -f "/www/konversi.html" ] && rm -f "/www/konversi.html" && echo "✓ konversi.html dihapus"                                           # Hapus file konversi.html lama
 
-# Step 2: Create necessary directories
-echo "Step 2: Creating directories..."
-mkdir -p /usr/lib/lua/luci/model/cbi
-mkdir -p /www/uci-static/eqosplus
+# 2. Pastikan direktori tujuan ada
+echo "Langkah 2: Membuat direktori (jika belum ada)..."
+mkdir -p /usr/lib/lua/luci/model/cbi      # Pastikan direktori model cbi tersedia
+mkdir -p /www/uci-static/eqosplus         # Pastikan direktori eqosplus tersedia pada uci-static
 
-# Step 3: Download and install files
-echo "Step 3: Downloading and installing files..."
+# 3. Download file baru dari GitHub ke path masing-masing
+echo "Langkah 3: Mengunduh dan menempatkan file..."
+echo "→ Mengunduh eqosplus.lua..."
+curl -fsSL "$REPO_URL/usr/lib/lua/luci/model/cbi/eqosplus.lua" -o "/usr/lib/lua/luci/model/cbi/eqosplus.lua" && echo "✓ eqosplus.lua berhasil dipasang" || { echo "Gagal download eqosplus.lua"; exit 1; }
 
-echo "Downloading eqosplus.lua..."
-if wget -q -O "/usr/lib/lua/luci/model/cbi/eqosplus.lua" "$REPO_URL/usr/lib/lua/luci/model/cbi/eqosplus.lua"; then
-    echo "Successfully installed: eqosplus.lua"
-else
-    echo "Failed to download: eqosplus.lua"
-    exit 1
-fi
+echo "→ Mengunduh custom.css..."
+curl -fsSL "$REPO_URL/www/uci-static/eqosplus/custom.css" -o "/www/uci-static/eqosplus/custom.css" && echo "✓ custom.css berhasil dipasang" || { echo "Gagal download custom.css"; exit 1; }
 
-echo "Downloading custom.css..."
-if wget -q -O "/www/uci-static/eqosplus/custom.css" "$REPO_URL/www/uci-static/eqosplus/custom.css"; then
-    echo "Successfully installed: custom.css"
-else
-    echo "Failed to download: custom.css"
-    exit 1
-fi
+echo "→ Mengunduh custom.js..."
+curl -fsSL "$REPO_URL/www/uci-static/eqosplus/custom.js" -o "/www/uci-static/eqosplus/custom.js" && echo "✓ custom.js berhasil dipasang" || { echo "Gagal download custom.js"; exit 1; }
 
-echo "Downloading custom.js..."
-if wget -q -O "/www/uci-static/eqosplus/custom.js" "$REPO_URL/www/uci-static/eqosplus/custom.js"; then
-    echo "Successfully installed: custom.js"
-else
-    echo "Failed to download: custom.js"
-    exit 1
-fi
+echo "→ Mengunduh konversi.html..."
+curl -fsSL "$REPO_URL/www/konversi.html" -o "/www/konversi.html" && echo "✓ konversi.html berhasil dipasang" || { echo "Gagal download konversi.html"; exit 1; }
 
-echo "Downloading konversi.html..."
-if wget -q -O "/www/konversi.html" "$REPO_URL/www/konversi.html"; then
-    echo "Successfully installed: konversi.html"
-else
-    echo "Failed to download: konversi.html"
-    exit 1
-fi
-
-# Step 4: Set proper permissions
-echo "Step 4: Setting permissions..."
+# 4. Set permission baca agar file dapat diakses LuCI/web (umum di OpenWrt 644)
+echo "Langkah 4: Mengatur permissions file..."
 chmod 644 /usr/lib/lua/luci/model/cbi/eqosplus.lua
 chmod 644 /www/uci-static/eqosplus/custom.css
 chmod 644 /www/uci-static/eqosplus/custom.js
 chmod 644 /www/konversi.html
 
-# Step 5: Restart LuCI service
-echo "Step 5: Restarting LuCI service..."
+# 5. Restart service LuCI (uhttpd) agar perubahan langsung diterapkan
+echo "Langkah 5: Restart service LuCI (web)..."
 if [ -f /etc/init.d/uhttpd ]; then
-    /etc/init.d/uhttpd restart
+    /etc/init.d/uhttpd restart && echo "✓ Service uhttpd (LuCI) berhasil direstart" || echo "Gagal restart uhttpd"
 else
-    echo "Warning: Could not restart LuCI service automatically"
+    echo "Peringatan: uhttpd tidak ditemukan, restart manual jika perlu"
 fi
 
-# Step 6: Clear LuCI cache
-echo "Step 6: Clearing LuCI cache..."
+# 6. Bersihkan cache LuCI
+echo "Langkah 6: Bersihkan cache LuCI..."
 rm -rf /tmp/luci-*
 
 echo ""
 echo "=========================================="
-echo "EQOSPlus Mod Indonesia installation completed!"
+echo "Instalasi EQOSPlus Mod Indonesia selesai!"
 echo "=========================================="
-echo ""
-echo "Files installed:"
+echo "File terpasang:"
 echo "  ✓ /usr/lib/lua/luci/model/cbi/eqosplus.lua"
 echo "  ✓ /www/uci-static/eqosplus/custom.css"
 echo "  ✓ /www/uci-static/eqosplus/custom.js"
 echo "  ✓ /www/konversi.html"
 echo ""
-echo "Please refresh your browser to see the changes."
-echo "Access EQOSPlus at: http://[router-ip]/cgi-bin/luci/admin/network/eqosplus"
-echo "Access Konversi at: http://[router-ip]/konversi.html"
+echo "Silakan refresh browser untuk melihat perubahan."
+echo "Akses EQOSPlus: http://[router-ip]/cgi-bin/luci/admin/network/eqosplus"
+echo "Akses Konversi: http://[router-ip]/konversi.html"
 echo ""
