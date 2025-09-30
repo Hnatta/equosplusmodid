@@ -9,12 +9,12 @@ echo "Starting EQOSPlus Mod Indonesia installation..."
 REPO_URL="https://raw.githubusercontent.com/Hnatta/equosplusmodid/main"
 
 # File paths
-FILES=(
+FILES="
     "usr/lib/lua/luci/model/cbi/eqosplus.lua:/usr/lib/lua/luci/model/cbi/eqosplus.lua"
     "www/uci-static/eqosplus/custom.css:/www/uci-static/eqosplus/custom.css"
     "www/uci-static/eqosplus/custom.js:/www/uci-static/eqosplus/custom.js"
     "www/konversi.html:/www/konversi.html"
-)
+"
 
 # Step 1: Remove existing files
 echo "Step 1: Removing existing files..."
