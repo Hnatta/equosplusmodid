@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <title>Konversi MB, Mb, KB eqosplus</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/luci-static/eqosplus/custom.css">
+</head>
+<body>
+  <div id="converterModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1000; display:flex; align-items:center; justify-content:center; transition:opacity 0.3s ease;">
+  <div class="form-konversi" style="position:relative; background:#fff; border-radius:16px; padding:24px; max-width:400px; width:90%; max-height:80vh; overflow-y:auto; box-shadow:0 4px 20px rgba(0,0,0,0.15); transform:scale(0.95); transition:transform 0.3s ease;">
+    <button class="close-btn" onclick="closeConverterModal()" style="position:absolute; top:12px; right:12px; background:none; border:none; font-size:24px; cursor:pointer; color:#666;">&times;</button>
+    <h2 style="margin:0 0 16px; font-size:1.5em; font-weight:600; color:#1f2a44;">Konversi Kecepatan</h2>
+    <label for="mb" style="display:block; margin:8px 0 4px; color:#002b49; font-weight:500;">MBps (Megabyte):</label>
+    <input type="number" id="mb" value="1" min="0" step="any" oninput="render()" style="background:#e3f1ff!important color:#1544b2!important; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:8px; font-size:1em;">
+    <label for="mbit" style="display:block; margin:8px 0 4px; color:#002b49; font-weight:500;">Mbps (Megabit):</label>
+    <input type="number" id="mbit" value="8" min="0" step="any" oninput="render()" style="background:#e3f1ff!important; color:#1544b2!important; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:8px; font-size:1em;">
+    <label for="kb" style="display:block; margin:8px 0 4px; color:#002b49; font-weight:500;">KBps (Kilobyte):</label>
+    <input type="number" id="kb" value="1024" min="0" step="any" oninput="render()" style="background:#e3f1ff!important; color:#1544b2!important; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:8px; font-size:1em;">
+    <div class="hasil" id="hasil" style="margin-top:20px; background:#f1f5f9; padding:16px; border-radius:10px;">
+      <div class="hasil-row" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <span class="hasil-label" style="font-weight:500; color:#1f2a44;">MB/s: <span id="out-mb">1</span></span>
+        <button class="copy-btn" id="copyBtn" style="padding:6px 16px; border-radius:8px; border:none; background:#3b82f6; color:#fff; font-size:0.9em; font-weight:500; cursor:pointer; transition:background 0.2s;">Salin</button>
+      </div>
+      <div class="hasil-row" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <span class="hasil-label" style="font-weight:500; color:#1f2a44;">Mb/s: <span id="out-mbit">8</span></span>
+      </div>
+      <div class="hasil-row" style="display:flex; justify-content:space-between; align-items:center;">
+        <span class="hasil-label" style="font-weight:500; color:#1f2a44;">KB/s: <span id="out-kb">1024</span></span>
+      </div>
+    </div>
+    <button class="clear-btn" id="clearBtn" style="width:100%; margin-top:16px; padding:10px; border-radius:8px; border:none; background:#ef4444; color:#fff; font-size:1em; font-weight:500; cursor:pointer; transition:background 0.2s;">Bersihkan</button>
+  </div>
+</div>
+  <script src="/luci-static/eqosplus/custom.js"></script>
+</body>
+</html>

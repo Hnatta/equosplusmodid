@@ -1,0 +1,230 @@
+body {
+  font-family: 'Inter', 'Roboto', Arial, sans-serif;
+  background: #f6f8fa;
+  margin: 0;
+  padding: 0;
+}
+
+.form-konversi {
+  background: #fff;
+  padding: 24px;
+  border-radius: 16px;
+  max-width: 400px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transform: scale(0.95);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#converterModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#converterModal.show {
+  opacity: 1;
+}
+
+#converterModal.show .form-konversi {
+  transform: scale(1);
+}
+
+.form-konversi label {
+  display: block;
+  margin: 8px 0 4px;
+  color: #1f2a44;
+  font-weight: 500;
+}
+
+.form-konversi input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1em;
+  transition: border-color 0.2s;
+}
+
+.form-konversi input[type="number"]:focus {
+  border-color: #3b82f6;
+  outline: none;
+}
+
+.hasil {
+  margin-top: 20px;
+  background: #f1f5f9;
+  padding: 16px;
+  border-radius: 10px;
+}
+
+.hasil-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.hasil-label {
+  font-weight: 500;
+  color: #1f2a44;
+}
+
+.copy-btn {
+  padding: 6px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #3b82f6;
+  color: #fff;
+  font-size: 0.9em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.copy-btn:hover {
+  background: #2563eb;
+}
+
+.copy-btn:active {
+  background: #1d4ed8;
+}
+
+.clear-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #ef4444;
+  color: #fff;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.clear-btn:hover {
+  background: #dc2626;
+}
+
+.clear-btn:active {
+  background: #b91c1c;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: #1f2a44;
+}
+
+@media (max-width: 480px) {
+  .form-konversi {
+    width: 95vw;
+    padding: 16px;
+    max-height: 85vh;
+  }
+  .hasil-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+
+/* Container dropdown */
+ul.dropdown {
+    background: #ffffff; /* Latar belakang putih */
+    border: 2px solid #007bff; /* Garis biru modern */
+    border-radius: 8px; /* Sudut membulat */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan halus */
+    padding: 20px; /* Ruang dalam */
+    max-height: 680px; /* Sesuai kebutuhan Anda */
+    overflow-y: auto; /* Scroll jika terlalu panjang */
+    font-family: 'Arial', sans-serif; /* Font modern */
+    width: 200px; /* Lebar dropdown */
+    position: absolute; /* Posisi absolut untuk kontrol penempatan */
+    z-index: 1000; /* Pastikan di atas elemen lain */
+    top: auto; /* Hapus properti bottom, gunakan top */
+}
+
+/* Item dalam dropdown */
+ul.dropdown li {
+    padding: 10px 15px; /* Ruang dalam item */
+    color: #333; /* Warna teks */
+    cursor: pointer; /* Kursor tangan saat hover */
+    transition: background 0.2s ease, color 0.2s ease; /* Transisi halus */
+}
+
+/* Efek hover pada item */
+ul.dropdown li:hover {
+    background: #007bff; /* Warna biru saat hover */
+    color: #ffffff; /* Teks putih saat hover */
+    border-radius: 4px; /* Sudut membulat pada item */
+}
+
+/* Item yang dipilih */
+ul.dropdown li[selected] {
+    background: #28a745; /* Warna hijau untuk item terpilih */
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Placeholder */
+ul.dropdown li[placeholder] {
+    color: #888; /* Warna abu-abu untuk placeholder */
+    font-style: italic;
+}
+
+/* Input kustom di bagian bawah */
+ul.dropdown li input.create-item-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+ul.dropdown li input.create-item-input:focus {
+    border-color: #007bff; /* Garis biru saat fokus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3); /* Efek fokus */
+}
+
+/* Pastikan dropdown muncul di atas */
+ul.dropdown.active {
+    display: block; /* Tampilkan saat aktif */
+    top: -680px; /* Posisikan di atas dengan jarak sesuai max-height */
+    transform: translateY(-100%); /* Geser ke atas relatif terhadap elemen pemicu */
+}
+
+@media screen and (max-width: 800px) {
+    fieldset, .cbi-section
+ {
+        padding: 5dvh 1rem!important;
+    }   table, .table
+ {
+        padding: 1rem 1rem 30dvh 1rem!important;
+    }
+}
